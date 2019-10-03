@@ -3,7 +3,7 @@
     <v-layout text-center wrap>
       <v-flex mb-4>
         <br />
-        <h1 class="display-2 font-weight-bold mb-3">ระบบลงทะเบียนผู้ปป่วยใน</h1>
+        <h1 class="display-2 font-weight-bold mb-3">ระบบลงทะเบียนผู้ป่วยใน</h1>
       </v-flex>
     </v-layout>
 
@@ -121,88 +121,7 @@
       </v-col>
     </v-row>
 
-    <!-- <div>
-    <h3>ระบบลงทะเบียนผู้ป่วยใน</h3>
-    <div class = "form-group">
-      
-    <div class="md-layout md-gutter"> 
-      <md-field>
-      <label>ชื่อ - นามสกุล</label>
-      <md-input ></md-input>
-    </md-field>
 
-   <md-field>
-      <label>รหัสบัตรประจำตัวประชาชน</label>
-      <md-input ></md-input>
-    </md-field>
-    
-
-        <md-field>
-        <label for="type">เพศ</label>
-          <md-select v-model="type" name = "type">
-            <md-option value = "man">ชาย</md-option>
-            <md-option value = "women">หญิง</md-option>
-          </md-select>
-          </md-field>
-
-      <md-field>
-            <label >วันเดือนปีเกิด</label>
-           <md-datepicker v-model="selectedDate" />
-           </md-field>
-
-    <md-field>
-        <label for="rule">สิทธิการรักษา</label>
-          <md-select v-model="rule" name = "rule">
-            <md-option value = "1">สิทธิผู้สูงอายุ</md-option>
-            <md-option value = "2">สิทธิบิัตรทอง 30 บาท</md-option>
-            <md-option value = "3">สิทธิประกันสังคม</md-option>
-            <md-option value = "4">สิทธิครอบครังข้าราชการ</md-option>
-            <md-option value = "5">สิทธิผู้พิการ</md-option>
-            <md-option value = "6">สิทธินักศึกษา</md-option>
-          </md-select>
-          </md-field>
-
-        <md-field>
-        <label for="rule">จังหวัด</label>
-          <md-select v-model="rule" name = "rule">
-            <md-option value = "1">ชัยภูมิ</md-option>
-            <md-option value = "2">นคราชสีมา</md-option>
-            <md-option value = "3">ขอนแก่น</md-option>
-            <md-option value = "4">มหาสารคาม</md-option>
-            <md-option value = "5">กรุงเทพมหานคร</md-option>
-            <md-option value = "6">เชียงใหม่</md-option>
-          </md-select>
-          </md-field>
-
-<md-field>
-      <label>ที่อยู่</label>
-      <md-textarea v-model="textarea"></md-textarea>
-    </md-field>
-
-    <md-field>
-      <label>อาการเบื้องต้น</label>
-      <md-textarea v-model="textarea" ></md-textarea>
-    </md-field>
-
-          
-
-    </div>
-         
-      
-    
-
-      <div>
-      <md-button class="md-dense md-raised md-primary">ยืนยัน</md-button>
-      <md-button class="md-dense md-primary">ยกเลิก</md-button>
-      
-    </div>  
-    </div>
-			
-
-			
-
-    
-    </div>-->
   </v-container>
 </template>
 
@@ -210,6 +129,8 @@
 import http from "../http-common";
 
 export default {
+
+
   name: "Patient",
   data() {
     return {
@@ -237,7 +158,7 @@ export default {
   methods: {
     /* eslint-disable no-console */
 
-    // ดึงข้อมูล Employee ใส่ combobox
+ 
     getGender() {
       http
         .get("/gender")
@@ -249,7 +170,7 @@ export default {
           console.log(e);
         });
     },
-    // ดึงข้อมูล Video ใส่ combobox
+
     getProvince() {
       http
         .get("/province")
@@ -261,7 +182,7 @@ export default {
           console.log(e);
         });
     },
-    // ดึงข้อมูล RentalType ใส่ combobox
+  
     getBenefit() {
       http
         .get("/benefit")

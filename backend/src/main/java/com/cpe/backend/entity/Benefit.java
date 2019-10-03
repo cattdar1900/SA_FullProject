@@ -28,9 +28,6 @@ public class Benefit {  //สิทธิการรักษา
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="BENEFIT_seq") 
   @Column(name = "BENEFIT_ID", unique = true, nullable = true)
   private @NonNull Long id;  
-  
-
-  
   private  String name ;  
   private String BeneDescriptstion ;
   private int dicount  ;

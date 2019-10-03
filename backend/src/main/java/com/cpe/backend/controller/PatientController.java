@@ -52,19 +52,15 @@ public class PatientController {
 
     @GetMapping("/patient")
     public Collection<Patient> Patients(){
+        
         return patientRepository.findAll().stream().collect(Collectors.toList());
     }
     
 
     @RequestMapping(value = "/patientPost",method = RequestMethod.POST)
     public Patient newPatient(@RequestBody Map<String, String> body) {
-
         Patient newPatient = new Patient();
-
-     
-        
-
-         Province Province = provincerRepository.findById(Long.valueOf(body.get("province")).longValue());
+        Province Province = provincerRepository.findById(Long.valueOf(body.get("province")).longValue());
         Benefit Benefit = benefitRepository.findById(Long.valueOf(body.get("benefit")).longValue());
         Gender Gender = genderRepository.findById(Long.valueOf(body.get("gender")).longValue());
            newPatient.setNationalID(Long.valueOf(body.get("nationalID").toString()));
@@ -76,7 +72,6 @@ public class PatientController {
            newPatient.setProvince(Province);
            newPatient.setBenefit(Benefit);
            newPatient.setGender(Gender);
-
           System.out.println(Province);
           System.out.println(Benefit);
           System.out.println(Gender);

@@ -1,6 +1,5 @@
 package com.cpe.backend;
 
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.ApplicationRunner;
@@ -11,9 +10,11 @@ import java.util.stream.Stream;
 import com.cpe.backend.entity.Benefit;
 import com.cpe.backend.entity.Gender;
 import com.cpe.backend.entity.Province;
+import com.cpe.backend.entity.User;
 import com.cpe.backend.repository.BenefitRepository;
 import com.cpe.backend.repository.GenderRepository;
 import com.cpe.backend.repository.ProvinceRepository;
+import com.cpe.backend.repository.UserRepository;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -23,8 +24,13 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(BenefitRepository repository,GenderRepository genderRepository,ProvinceRepository provinceRepository) {
+	ApplicationRunner init(UserRepository userRepo,BenefitRepository repository,GenderRepository genderRepository,ProvinceRepository provinceRepository) {
 		return args -> {
+			User user1 = new User();
+			user1.setId("B5907519");
+			user1.setPassword("1500");
+			userRepo.save(user1);
+
 			Gender gender1 = new Gender();
 			gender1.setName("ชาย");
 			gender1.setGenderDescription("ผู้ชาย");
