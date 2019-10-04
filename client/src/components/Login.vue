@@ -71,7 +71,7 @@ export default {
           console.log(response);
           if(this.User.username == response.data){
               alert("User " + response.data +" Login Success !  ");
-              this.$router.push("/patient");
+              this.$router.push("/home");
           }
           else{
               alert(response.data );           
@@ -79,6 +79,7 @@ export default {
         })
         .catch(e => {
           console.log(e);
+          alert("Error Username or Password invalid !")
         });
         console.log(this.User);
 

@@ -25,12 +25,10 @@ import javax.persistence.Entity;
 @Table(name = "PATIENT")
 public class Patient {  //ผู้ป่วย
       
-  @Id 
-  @SequenceGenerator(name="patient_seq",sequenceName="patient_seq")
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="patient_seq") 
-  @Column(name = "Patinet_ID", unique = true, nullable = true)
-  private @NonNull Long id;  
-
+   
+  
+   
+  @Id
   @Column(name = "NATIONAL_ID", unique = true, nullable = true)
   private  Long nationalID;  
 
