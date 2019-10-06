@@ -1,20 +1,38 @@
 package com.cpe.backend;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.ApplicationRunner;
-import org.springframework.context.annotation.Bean;
-
 import java.util.stream.Stream;
 
-import com.cpe.backend.entity.Benefit;
-import com.cpe.backend.entity.Gender;
-import com.cpe.backend.entity.Province;
-import com.cpe.backend.entity.User;
-import com.cpe.backend.repository.BenefitRepository;
-import com.cpe.backend.repository.GenderRepository;
-import com.cpe.backend.repository.ProvinceRepository;
-import com.cpe.backend.repository.UserRepository;
+import com.cpe.backend.Appointment.entity.Department;
+import com.cpe.backend.Appointment.entity.TypeCause;
+import com.cpe.backend.Appointment.entity.TypeGoing;
+import com.cpe.backend.Appointment.repository.DepartmentRepository;
+import com.cpe.backend.Appointment.repository.TypeCauseRepository;
+import com.cpe.backend.Appointment.repository.TypeGoingRepository;
+import com.cpe.backend.Discharge.entity.DistributionType;
+import com.cpe.backend.Discharge.entity.Selfcare;
+import com.cpe.backend.Discharge.entity.Sensorium;
+import com.cpe.backend.Discharge.repository.DistributionTypeRepository;
+import com.cpe.backend.Discharge.repository.SelfcareRepository;
+import com.cpe.backend.Discharge.repository.SensoriumRepository;
+import com.cpe.backend.Examination.entity.Doctor;
+import com.cpe.backend.Examination.entity.Duration;
+import com.cpe.backend.Examination.entity.State;
+import com.cpe.backend.Examination.repository.DoctorRepository;
+import com.cpe.backend.Examination.repository.DurationRepository;
+import com.cpe.backend.Examination.repository.StateRepository;
+import com.cpe.backend.RegisterPatient.entity.Benefit;
+import com.cpe.backend.RegisterPatient.entity.Gender;
+import com.cpe.backend.RegisterPatient.entity.Province;
+import com.cpe.backend.RegisterPatient.entity.User;
+import com.cpe.backend.RegisterPatient.repository.BenefitRepository;
+import com.cpe.backend.RegisterPatient.repository.GenderRepository;
+import com.cpe.backend.RegisterPatient.repository.ProvinceRepository;
+import com.cpe.backend.RegisterPatient.repository.UserRepository;
+
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BackendApplication {
@@ -24,7 +42,12 @@ public class BackendApplication {
 	}
 
 	@Bean
-	ApplicationRunner init(UserRepository userRepo,BenefitRepository repository,GenderRepository genderRepository,ProvinceRepository provinceRepository) {
+	ApplicationRunner init(UserRepository userRepo,BenefitRepository repository,
+	GenderRepository genderRepository,ProvinceRepository provinceRepository,
+	TypeCauseRepository typeCauseRepository, DepartmentRepository departmentRepository,
+	TypeGoingRepository typeGoingRepository,SensoriumRepository sensoriumRepository,
+	SelfcareRepository selfcareRepository,DistributionTypeRepository distributionTypeRepository,
+	StateRepository s,DoctorRepository dr,DurationRepository du) {
 		return args -> {
 			User user1 = new User();
 			user1.setId("B5907519");
@@ -78,6 +101,61 @@ public class BackendApplication {
 			benefit5.setBeneDescriptstion("รักษาได้บางโรคต้องเป็นนักศึกษามหาวิทยาลัยเทคโนโลยีสุรนารีเท่านั้น");
 			benefit5.setDicount(20);
 			repository.save(benefit5);
+
+			Stream.of("ติดตามอาการ","นอนโรงพยาบาล").forEach(typecauseSelect ->{
+				TypeCause typeCause2 = new TypeCause();
+				typeCause2.setTypecauseSelect(typecauseSelect);
+				typeCauseRepository.save(typeCause2);
+			});
+
+			Stream.of("แผนกวิสัญญี","แผนกศัลยกรรม","แผนกกุมารเวชกรรม","แผนกเวชศาสตร์ฟื้นฟู","แผนกอายุรกรรม","แผนกจักษุ","แผนกหู คอ จมูก","แผนกเภสัชกรรม","แผนกจิตเวช","แผนกรังสีกรรม","แผนกผู้ป่วยใน").forEach(departmentlSelect ->{
+				Department department = new Department();
+				department.setDepartmentlSelect(departmentlSelect);
+				departmentRepository.save(department);
+			});
+
+			Stream.of("รถยนต์ส่วนบุคคล","รถโรงพยาบาล","รถจักรยานยนต์" , "เดิน").forEach(typegoingSelect ->{
+				TypeGoing typeGoing = new TypeGoing();
+				typeGoing.setTypegoingSelect(typegoingSelect);
+				typeGoingRepository.save(typeGoing);
+			});
+
+			Stream.of("รู้สึกตัว", "สับสน", "ไม่รู้สึกตัว").forEach(name -> {
+				Sensorium sensorium = new Sensorium(); // สร้าง Object Employee
+				sensorium.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Employee
+				sensoriumRepository.save(sensorium); // บันทึก Objcet ชื่อ Employee
+			});
+
+			Stream.of("ช่วยเหลือตนเองได้", "ช่วยเหลือตนเองได้บางส่วน", "ช่วยเหลือตนเองไม่ได้").forEach(name -> {
+				Selfcare selfcare = new Selfcare(); // สร้าง Object Customer
+				selfcare.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Customer
+				selfcareRepository.save(selfcare); // บันทึก Objcet ชื่อ Customer
+			});
+
+			Stream.of("แพทย์อนุญาต", "หนีกลับ", "ถึงแก่กรรม", "ส่งต่อ").forEach(name -> {
+				DistributionType distributionType = new DistributionType(); // สร้าง Object Video
+				distributionType.setName(name); // set ชื่อ (name) ให้ Object ชื่อ Video
+				distributionTypeRepository.save(distributionType); // บันทึก Objcet ชื่อ Video
+			});
+
+			Stream.of("ดีขึ้น", "แย่ลง", "คงที่").forEach(name -> {
+				State state = new State();
+				state.setName(name);
+				s.save(state);
+			});
+
+			Stream.of("นพ. เอ", "นพ. บี", "พญ. ซี").forEach(name -> {
+                Doctor doctor = new Doctor();
+                doctor.setName(name);
+                dr.save(doctor);
+			});
+			Stream.of("เช้า", "เที่ยง", "เย็น", "ดึก").forEach(name -> {
+                Duration duration = new Duration();
+                duration.setName(name);
+                du.save(duration);
+			});
+
+			
 
 			
 		};

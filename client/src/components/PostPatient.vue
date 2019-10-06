@@ -126,8 +126,9 @@
 </template>
 
 <script>
-import http from "../http-common";
+ 
 
+import http from "../http-common";
 export default {
 
 
@@ -205,6 +206,8 @@ export default {
         )
         .then(response => {
           console.log(response);
+          alert("บันทึกสำเร็จ");
+          this.clear();
         })
         .catch(e => {
           console.log(e);
@@ -238,6 +241,10 @@ export default {
     this.getGender();
     this.getProvince();
     this.getBenefit();
+
+    
+    
   }
+  
 };
 </script>

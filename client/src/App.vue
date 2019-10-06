@@ -24,12 +24,12 @@
       <v-toolbar-items>
         <v-btn text>Home</v-btn>
         <v-btn @click="goRegister" text>ระบบลงทะเบียนผู้ป่วยใน</v-btn>
-        <v-btn text>ระบบประเมินอาการผู้ป่วย</v-btn>
+        <v-btn @click="goExamination" text>ระบบประเมินอาการผู้ป่วย</v-btn>
         <v-btn text>ระบบจ่ายยา</v-btn>
         <v-btn text>ระบบชำระเงิน</v-btn>
-        <v-btn text>ระบบนัดหมายผู้ป่วย</v-btn>
+        <v-btn @click="goAppoint" text>ระบบนัดหมายผู้ป่วย</v-btn>
         <v-btn text>ระบบจองเตียง</v-btn>
-        <v-btn  text>ระบบนำจำหน่าย</v-btn>
+        <v-btn @click="goDischarge" text>ระบบนำจำหน่าย</v-btn>
         <v-btn @click="logout"  color="red" text>ออกจากระบบ</v-btn>
       </v-toolbar-items>
 <!-- 
@@ -67,6 +67,15 @@ export default {
      },
      goRegister(){
        this.$router.push("/patient");
+     },
+     goAppoint(){
+       this.$router.push("/appointment");
+     },
+     goDischarge(){
+       this.$router.push("/discharge");
+     },
+     goExamination(){
+       this.$router.push("/examination");
      }
      
 
