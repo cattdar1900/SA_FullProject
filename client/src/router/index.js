@@ -11,6 +11,8 @@ import Reservation from "../components/HelloWorld.vue";
 import PostPayment from "../components/PostPayment.vue";
 import Bill from "../components/Bill.vue";
 import Bills from "../components/Bills.vue";
+import Doctororder from "../components/DoctorOrder.vue";
+import Ordertable from "../components/OrderTable.vue";
 
 Vue.use(Router);
 
@@ -59,6 +61,14 @@ export default new Router({
         {
             path: '/bills/:id',
             component: Bills
+        },
+        {
+            path: '/doctororder',
+            component: Doctororder
+        },
+        {
+            path: '/viewtable/:id',
+            component: Ordertable
         }
     ]
     

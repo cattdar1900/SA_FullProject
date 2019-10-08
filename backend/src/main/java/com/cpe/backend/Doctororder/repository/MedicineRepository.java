@@ -1,8 +1,8 @@
-package com.cpe.backend.Payment.repository;
+package com.cpe.backend.Doctororder.repository;
 
 
 
-import com.cpe.backend.Payment.entity.Medicine;
+import com.cpe.backend.Doctororder.entity.Medicine;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;  

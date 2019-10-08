@@ -90,7 +90,7 @@
                   outlined
                   v-model="examinationSystem.Doctor_ID"
                   :items="doctors"
-                  item-text="name"
+                  item-text="dname"
                   item-value="id"
                   :rules="[(v) => !!v || 'Item is required']"
                   required

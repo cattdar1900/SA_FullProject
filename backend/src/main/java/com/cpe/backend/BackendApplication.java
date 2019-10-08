@@ -30,14 +30,16 @@ import com.cpe.backend.Examination.repository.DoctorRepository;
 import com.cpe.backend.Examination.repository.DurationRepository;
 import com.cpe.backend.Examination.repository.ExaminationRepository;
 import com.cpe.backend.Examination.repository.StateRepository;
-import com.cpe.backend.Payment.entity.DoctorOrder;
-import com.cpe.backend.Payment.entity.Medicine;
-import com.cpe.backend.Payment.entity.MedicineItem;
+import com.cpe.backend.Doctororder.entity.DoctorOrder;
+import com.cpe.backend.Doctororder.entity.MedicationType;
+import com.cpe.backend.Doctororder.entity.Medicine;
+import com.cpe.backend.Doctororder.entity.MedicineItem;
 import com.cpe.backend.Payment.entity.PaymentOption;
 import com.cpe.backend.Payment.entity.TypeBank;
-import com.cpe.backend.Payment.repository.DoctorOrderRepository;
-import com.cpe.backend.Payment.repository.MedicineItemRepository;
-import com.cpe.backend.Payment.repository.MedicineRepository;
+import com.cpe.backend.Doctororder.repository.DoctorOrderRepository;
+import com.cpe.backend.Doctororder.repository.MedicationTypeRepository;
+import com.cpe.backend.Doctororder.repository.MedicineItemRepository;
+import com.cpe.backend.Doctororder.repository.MedicineRepository;
 import com.cpe.backend.Payment.repository.PaymentOptionRepository;
 import com.cpe.backend.Payment.repository.TypeBankRepository;
 import com.cpe.backend.RegisterPatient.entity.Benefit;
@@ -72,7 +74,7 @@ public class BackendApplication {
 	StateRepository s,DoctorRepository dr,DurationRepository du,BedRepository bedRepository,NurseRepository nurseRepository,
 	PatientRepository patientRepository,MedicineRepository medicineRepository,MedicineItemRepository md,
 	DoctorOrderRepository doctorOrderRepository,PaymentOptionRepository paymentoptionRepository,TypeBankRepository typeBankRepository,
-	ReservationRepository reservationRepository,ExaminationRepository examinationRepository) {
+	ReservationRepository reservationRepository,ExaminationRepository examinationRepository,MedicationTypeRepository medicationTypeRepository) {
 		return args -> {
 			User user1 = new User();
 			user1.setId("B5907519");
@@ -171,7 +173,7 @@ public class BackendApplication {
 
 			Stream.of("นพ. เอ", "นพ. บี", "พญ. ซี").forEach(name -> {
                 Doctor doctor = new Doctor();
-                doctor.setName(name);
+                doctor.setDname(name);
                 dr.save(doctor);
 			});
 			Stream.of("เช้า", "เที่ยง", "เย็น", "ดึก").forEach(name -> {
@@ -213,75 +215,79 @@ public class BackendApplication {
 			p2.setName("เตอร์เอง");
 			patientRepository.save(p2);
 
-			ExaminationSystem ex = new ExaminationSystem();
-			ex.setPatient(p1);
-			examinationRepository.save(ex);
+			Patient p3 = new Patient();
+			p3.setNationalID((long) 9999);
+			p3.setName("บีมเองค่ะ");
+			patientRepository.save(p3);
 
-			ExaminationSystem ex2 = new ExaminationSystem();
-			ex2.setPatient(p2);
-			examinationRepository.save(ex2);
+			Patient p4 = new Patient();
+			p4.setNationalID((long) 8888);
+			p4.setName("บีมอีกคนไง");
+			patientRepository.save(p4);
+
 
 			Medicine medicine1 = new Medicine(); 
-					medicine1.setName("ยาแก้ไอ"); // set ชื่อ (name) ให้ Object ชื่อ Employee
+					medicine1.setMname("ยาแก้ไอ"); // set ชื่อ (name) ให้ Object ชื่อ Employee
 					medicine1.setPrice(20L);
 					medicineRepository.save(medicine1);
 				
 				
 					Medicine medicine2 = new Medicine(); 
-					medicine2.setName("ยาลดไข้"); // set ชื่อ (name) ให้ Object ชื่อ Employee
+					medicine2.setMname("ยาลดไข้"); // set ชื่อ (name) ให้ Object ชื่อ Employee
 					medicine2.setPrice(30L);
 					medicineRepository.save(medicine2);
 				
 				
 					Medicine medicine3 = new Medicine(); 
-					medicine3.setName("ยาแก้แพ้"); // set ชื่อ (name) ให้ Object ชื่อ Employee
+					medicine3.setMname("ยาแก้แพ้"); // set ชื่อ (name) ให้ Object ชื่อ Employee
 					medicine3.setPrice(40L);
 					medicineRepository.save(medicine3);
 
-			DoctorOrder doctorOrder = new DoctorOrder();
-			String sDate1="10/4/2019";  
-			Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);									
-			doctorOrder.setStartDate(date1);
-			doctorOrder.setEx(ex);
+			// DoctorOrder doctorOrder = new DoctorOrder();
+			// String sDate1="10/4/2019";  
+			// Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);									
+			// doctorOrder.setDate(date1);
+			// doctorOrder.setEx(ex);
 			
 
 
 
-			DoctorOrder doctorOrder2 = new DoctorOrder();
-			String sDate2="11/4/2019";
-			Date date2= new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
-			doctorOrder2.setStartDate(date2);	
-			doctorOrder2.setEx(ex2);
+			// DoctorOrder doctorOrder2 = new DoctorOrder();
+			// String sDate2="11/4/2019";
+			// Date date2= new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
+			// doctorOrder2.setDate(date2);	
+			// doctorOrder2.setEx(ex2);
 			
-			doctorOrderRepository.save(doctorOrder2);
-			doctorOrderRepository.save(doctorOrder);	
+				
 
-			MedicineItem  mid1 = new MedicineItem();
-			mid1.setMedicine(medicine1);
-			mid1.setDr(doctorOrder2);
-			md.save(mid1);
+			// MedicineItem  mid1 = new MedicineItem();
+			// mid1.setMedicine(medicine1);
+			// mid1.setDoctorOrder(doctorOrder2);
+			// md.save(mid1);
 
-			MedicineItem  mid2 = new MedicineItem();
-			mid2.setMedicine(medicine2);
-			mid2.setDr(doctorOrder2);
-			md.save(mid2);
+			// MedicineItem  mid2 = new MedicineItem();
+			// mid2.setMedicine(medicine2);
+			// mid2.setDoctorOrder(doctorOrder2);
+			// md.save(mid2);
 
-			MedicineItem  mid3 = new MedicineItem();
-			mid3.setMedicine(medicine3);
-			mid3.setDr(doctorOrder2);
-			md.save(mid3);
+			// MedicineItem  mid3 = new MedicineItem();
+			// mid3.setMedicine(medicine3);
+			// mid3.setDoctorOrder(doctorOrder2);
+			// md.save(mid3);
 
 			
 
-			MedicineItem  mid5 = new MedicineItem();
-			mid5.setMedicine(medicine2);
-			mid5.setDr(doctorOrder);
-			md.save(mid5);
+			// MedicineItem  mid5 = new MedicineItem();
+			// mid5.setMedicine(medicine2);
+			// mid5.setDoctorOrder(doctorOrder);
+			// md.save(mid5);
 
-			MedicineItem  mid6 = new MedicineItem();
-			mid6.setMedicine(medicine3);
-			mid6.setDr(doctorOrder);
-			md.save(mid6);
+			// MedicineItem  mid6 = new MedicineItem();
+			// mid6.setMedicine(medicine3);
+			// mid6.setDoctorOrder(doctorOrder);
+			// md.save(mid6);
+
+			
 
 			Stream.of("ชำระเงินสด","ชำระผ่านบัตร").forEach(name -> {
 				PaymentOption paymentoption = new PaymentOption(); // สร้าง Object Employee
@@ -297,36 +303,85 @@ public class BackendApplication {
 
 			
 
-			Bed bed = new Bed(); // สร้าง Object Customer
-			bed.setName("ห้องพิเศษโคตร ๆ");
-			bed.setPrice(900);
-			bedRepository.save(bed);
+			// Bed bed = new Bed(); // สร้าง Object Customer
+			// bed.setName("ห้องพิเศษโคตร ๆ");
+			// bed.setPrice(900);
+			// bedRepository.save(bed);
 
-			Bed bed1 = new Bed(); // สร้าง Object Customer
-			bed1.setName("ห้องพิเศษโคตร ๆๆๆๆ");
-			bed1.setPrice(5000);
-			bedRepository.save(bed1);
+			// Bed bed1 = new Bed(); // สร้าง Object Customer
+			// bed1.setName("ห้องพิเศษโคตร ๆๆๆๆ");
+			// bed1.setPrice(5000);
+			// bedRepository.save(bed1);
 
-			String sDate3="2/4/2019";  
-			Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(sDate3);									
-			doctorOrder.setStartDate(date3);
-			Reservation r1 = new Reservation();
-			r1.setPatient(p1);
-			r1.setReservDate(date2);
-			r1.setBed(bed);
-			reservationRepository.save(r1);
+			// String sDate3="2/4/2019";  
+			// Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(sDate3);									
+			// doctorOrder.setDate(date3);
+			// Reservation r1 = new Reservation();
+			// r1.setPatient(p1);
+			// r1.setReservDate(date2);
+			// r1.setBed(bed);
+			// reservationRepository.save(r1);
 
-			String sDate4="10/4/2019";  
-			Date date4=new SimpleDateFormat("dd/MM/yyyy").parse(sDate4);									
-			doctorOrder.setStartDate(date3);
-			Reservation r2 = new Reservation();
-			r2.setPatient(p2);
-			r2.setReservDate(date4);
-			r2.setBed(bed1);
-			reservationRepository.save(r2);
+			// String sDate4="10/4/2019";  
+			// Date date4=new SimpleDateFormat("dd/MM/yyyy").parse(sDate4);									
+			// doctorOrder2.setDate(date4);
+			// Reservation r2 = new Reservation();
+			// r2.setPatient(p2);
+			// r2.setReservDate(date4);
+			// r2.setBed(bed1);
+			// reservationRepository.save(r2);
+
+			//doctorOrderRepository.save(doctorOrder2);
+			//doctorOrderRepository.save(doctorOrder);
+
+			MedicationType medType1 = new MedicationType();
+			medType1.setTypeName("ก่อนอาหาร");
+			medicationTypeRepository.save(medType1);
+
+			MedicationType medType2 = new MedicationType();
+			medType2.setTypeName("ก่อนอาหาร 30 นาที");
+			medicationTypeRepository.save(medType2);
 
 
+			MedicationType medType3 = new MedicationType();
+			medType3.setTypeName("หลังอาหาร");
+			medicationTypeRepository.save(medType3);
 
+			MedicationType medType4 = new MedicationType();
+			medType4.setTypeName("หลังอาหารทันที");
+			medicationTypeRepository.save(medType4);
+
+			MedicationType medType5 = new MedicationType();
+			medType5.setTypeName("ทุกๆ 6 ชั่วโมง");
+			medicationTypeRepository.save(medType5);
+
+			MedicationType medType6 = new MedicationType();
+			medType6.setTypeName("ทุกๆ 4 ชั่วโมง");
+			medicationTypeRepository.save(medType6);
+
+			MedicationType medType7 = new MedicationType();
+			medType7.setTypeName("ทุกครั้งที่มีอาการ");
+			medicationTypeRepository.save(medType7);
+
+			// ExaminationSystem examination1 = new ExaminationSystem();
+			// String sDate99="11/4/2019";
+			// //Date date1 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate1);
+			// examination1.setCheckDate(sDate99);
+			// examination1.setPulse(200);
+			// examination1.setPressure("123");
+			// examination1.setSymptom("ไข้หวัด");
+			// examination1.setPatient(p3);
+			// examinationRepository.save(examination1);
+
+			// ExaminationSystem examination2 = new ExaminationSystem();
+			// String sDate88="11/4/2019";
+			// //Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(sDate2);
+			// examination2.setCheckDate(sDate88);
+			// examination2.setPulse(150);
+			// examination2.setPressure("123");
+			// examination2.setSymptom("ท้องเสีย");
+			// examination2.setPatient(p4);
+			// examinationRepository.save(examination2);
 			
 
 

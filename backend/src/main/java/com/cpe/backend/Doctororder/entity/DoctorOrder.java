@@ -1,4 +1,4 @@
-package com.cpe.backend.Payment.entity;
+package com.cpe.backend.Doctororder.entity;
 
 import lombok.*;
 
@@ -15,6 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.cpe.backend.Examination.entity.ExaminationSystem;
+import com.cpe.backend.Payment.entity.Payment;
 // import com.fasterxml.jackson.annotation.JsonManagedReference;
 // import com.fasterxml.jackson.annotation.JsonBackReference;
 // import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,8 +40,8 @@ public class DoctorOrder { // สิทธิการรักษา
   @Column(name = "DOCTORORDER_ID", unique = true, nullable = true)
   private @NonNull Long id;
 
-  @Column(name = "START_DATE")
-  private @NonNull Date startDate;
+  @Column(name = "DATE")
+  private @NonNull Date Date;
 
   // @Column(name="END_DATE")
   // private @NonNull String endDate;
@@ -58,9 +59,10 @@ public class DoctorOrder { // สิทธิการรักษา
   // //mappedBy  = "type"
   // private Collection<MedicineItem> md;
 
-  @OneToMany(fetch = FetchType.LAZY)
+  @OneToMany(fetch = FetchType.EAGER , mappedBy="doctorOrder")
   //mappedBy  = "type"
-  private Collection<MedicineItem> md;
+  @JsonManagedReference
+  private Collection<MedicineItem> medicineItem;
 
      @OneToOne(fetch = FetchType.EAGER)
      private ExaminationSystem ex;

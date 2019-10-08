@@ -1,10 +1,10 @@
-package com.cpe.backend.Payment.repository;
+package com.cpe.backend.Doctororder.repository;
 
 import java.util.Collection;
 import java.util.List;
 
-import com.cpe.backend.Payment.entity.Medicine;
-import com.cpe.backend.Payment.entity.MedicineItem;
+import com.cpe.backend.Doctororder.entity.Medicine;
+import com.cpe.backend.Doctororder.entity.MedicineItem;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

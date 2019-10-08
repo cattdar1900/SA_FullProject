@@ -25,7 +25,7 @@
         <v-btn text>Home</v-btn>
         <v-btn @click="goRegister" text>ระบบลงทะเบียนผู้ป่วยใน</v-btn>
         <v-btn @click="goExamination" text>ระบบประเมินอาการผู้ป่วย</v-btn>
-        <v-btn text>ระบบจ่ายยา</v-btn>
+        <v-btn @click="goDoctororder" text>ระบบจ่ายยา</v-btn>
         <v-btn @click="goPayment" text>ระบบชำระเงิน</v-btn>
         <v-btn @click="goAppoint" text>ระบบนัดหมายผู้ป่วย</v-btn>
         <v-btn @click="goReservation" text>ระบบจองเตียง</v-btn>
@@ -83,6 +83,9 @@ export default {
      goPayment(){
        this.$router.push("/postPayment");
      },
+     goDoctororder(){
+       this.$router.push("/doctororder");
+     }
      
 
 

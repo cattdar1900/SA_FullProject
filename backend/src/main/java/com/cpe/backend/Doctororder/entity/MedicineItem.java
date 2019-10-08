@@ -1,4 +1,4 @@
-package com.cpe.backend.Payment.entity;
+package com.cpe.backend.Doctororder.entity;
 
 import lombok.*;
 
@@ -40,15 +40,21 @@ public class MedicineItem {
   @JoinColumn(name = "Medicines_ID", insertable = true)
   private Medicine medicine;
 
+  @Getter@Setter
+  @ManyToOne(fetch = FetchType.EAGER, targetEntity = MedicationType.class)
+  @JoinColumn(name = "MedicationType_id", insertable = true)
+  private MedicationType medicationType;
+
 //   @Getter@Setter
 //   @ManyToOne(fetch = FetchType.EAGER, targetEntity = DoctorOrder.class)
 //   @JoinColumn(name = "DoctorOrder_ID", insertable = true)
 //   private DoctorOrder dr;
 
 @Getter @Setter
-@ManyToOne(fetch = FetchType.EAGER, targetEntity = DoctorOrder.class)
-@JoinColumn(name = "DocOrder_ID", insertable = true)
-private DoctorOrder Dr ;
+@ManyToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL,targetEntity = DoctorOrder.class)
+@JoinColumn(name = "MedicineItem")
+@JsonIgnore
+private DoctorOrder doctorOrder ;
 
   
  

@@ -1,6 +1,6 @@
 package com.cpe.backend.Payment.controller;
 
-import com.cpe.backend.Payment.entity.DoctorOrder;
+import com.cpe.backend.Doctororder.entity.DoctorOrder;
 // import com.cpe.backend.entity.DoctorOrder;
 // import com.cpe.backend.entity.Patient;
 import com.cpe.backend.Payment.entity.Payment;
@@ -8,7 +8,7 @@ import com.cpe.backend.Payment.entity.Payment;
 // import com.cpe.backend.entity.TypeBank;
 // import com.cpe.backend.repository.PatientRepository;
 import com.cpe.backend.Payment.repository.PaymentOptionRepository;
-import com.cpe.backend.Payment.repository.DoctorOrderRepository;
+import com.cpe.backend.Doctororder.repository.DoctorOrderRepository;
 import com.cpe.backend.Payment.repository.PaymentRepository;
 import com.cpe.backend.Payment.repository.TypeBankRepository;
 // import com.fasterxml.jackson.databind.JsonNode;

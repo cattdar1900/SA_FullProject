@@ -1,4 +1,4 @@
-package com.cpe.backend.Payment.entity;
+package com.cpe.backend.Doctororder.entity;
 
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class Medicine {
   private @NonNull Long id;  
 
   @Getter@Setter
-  private @NonNull String name;
+  private @NonNull String Mname;
 
   @Getter@Setter
   private @NonNull Long price;

@@ -1,4 +1,4 @@
-package com.cpe.backend.Payment.controller;
+package com.cpe.backend.Doctororder.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +10,10 @@ import java.util.List;
 //import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.cpe.backend.Payment.repository.MedicineItemRepository;
-import com.cpe.backend.Payment.repository.MedicineRepository;
-import com.cpe.backend.Payment.entity.Medicine;
-import com.cpe.backend.Payment.entity.MedicineItem;
+import com.cpe.backend.Doctororder.repository.MedicineItemRepository;
+import com.cpe.backend.Doctororder.repository.MedicineRepository;
+import com.cpe.backend.Doctororder.entity.Medicine;
+import com.cpe.backend.Doctororder.entity.MedicineItem;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
