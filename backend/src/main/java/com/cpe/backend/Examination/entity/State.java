@@ -32,7 +32,7 @@ public class State {
 
     private @NonNull String name;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     //mappedBy  = "type"
     private Collection<ExaminationSystem> ExaminationSystem;
 

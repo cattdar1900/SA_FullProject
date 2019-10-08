@@ -17,6 +17,7 @@ public class Department {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="department_seq")
     @Column(name="DEPARTMENT_ID",unique = true, nullable = true)
     private @NotNull Long id;
+    @Getter @Setter
     private @NotNull String departmentlSelect;
 
 
