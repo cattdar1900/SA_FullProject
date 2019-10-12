@@ -1,6 +1,14 @@
 <template>
   <v-container>
     <v-layout text-center wrap>
+       <v-flex md12  class="mt-1">
+                    <v-img
+                    :src="require('../assets/pills.png')"
+                    class="my-3"
+                    contain
+                    height="200"
+                    ></v-img>
+        </v-flex>
       <v-flex mb-4>
         <br />
         <h1 class="display-2 font-weight-bold mb-3">ระบบสั่งจ่ายยา</h1>
@@ -8,85 +16,12 @@
     </v-layout>
 
     <v-row justify="center">
-      <v-col cols="4">
+      <v-col cols="12">
         <v-form v-model="valid" ref="form">
-          <!-- <v-row justify="center">
-            <v-col cols="10">
-              <v-text-field
-                outlined
-                label="Pateint Citizen ID"
-                v-model="videoRental.customerId"
-                :rules="[(v) => !!v || 'Item is required']"
-                required
-              ></v-text-field>
-              <p v-if="customerCheck != ''">Pateint Name : {{customerName}}</p>
-            </v-col>
-            <v-col cols="2">
-              <div class="my-2">
-                <v-btn @click="findCustomer" depressed large color="primary">Search</v-btn>
-              </div>
-            </v-col>
-          </v-row> -->
-
           <div>
-            <!-- <v-row>
-              <v-col cols="10"  class="elevation-12">
-                <v-select
-                  label="Examination"
-                  outlined
-                  v-model="videoRental.employeeId"
-                  :items="employees"
-                  item-text="name"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                ></v-select>
-              </v-col>
-            </v-row> -->
-            <v-row>
-              <!-- <v-col cols="10">
-                <v-combobox
-                  label="Medicine"
-                  outlined
-                  v-model="videoRental.rentalId"
-                  :items="rentalTypes"
-                  item-text="name"
-                  item-value="id"
-                  multiple
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                ></v-combobox>
-              </v-col> -->
-
-              <!-- <v-flex md12>
-                    <v-row justify="center" class="elevation-12">
-                        <v-col cols="10" sm="10" md="6" >
-                            <v-combobox
-                                v-model="select"
-                                :items="items"
-                                label="Medicine"
-                                multiple
-                                chips
-                            ></v-combobox>
-                        </v-col>
-                    </v-row>
-                </v-flex> -->
-        
-              <!-- <v-col cols="10">
-                <v-select
-                  label="Medication"
-                  outlined
-                  v-model="videoRental.videoId"
-                  :items="videos"
-                  item-text="title"
-                  item-value="id"
-                  :rules="[(v) => !!v || 'Item is required']"
-                  required
-                ></v-select>
-              </v-col> -->
-
+            
                 <v-flex md12>
-                    <v-row justify="center" class="elevation-12">
+                    <v-row justify="center" >
                         <v-col cols="12" sm="10" md="6">
                             <v-select
                             v-model="doctorsOrder.examinationId"
@@ -100,7 +35,7 @@
                 </v-flex>
 
                 <v-flex md12>
-                    <v-row justify="center" class="elevation-12">
+                    <v-row justify="center">
                         <v-col cols="12" sm="10" md="6" >
                             <v-select
                                 v-model="doctorsOrder.medicineIds"
@@ -117,7 +52,7 @@
     
                 <v-flex md12>
                     <v-row justify="center">
-                        <v-col cols="10" sm="10" md="6">
+                        <v-col cols="12" sm="10" md="6">
                             <v-select
                                 v-model="doctorsOrder.medicationTypeIds"
                                 :items="medicationType"
@@ -125,49 +60,28 @@
                                 item-value="id"
                                 chips
                                 multiple
-                                label="MedicationType"
+                                label="Medication Type"
                             ></v-select>
                         </v-col>
                     </v-row>
                 </v-flex>
-
-
-                <!-- <v-row justify="center" class="elevation-12">
-                  <v-col cols="12" sm="10" md="6">
-                    <v-menu
-                      v-model="menu2"
-                      :close-on-content-click="false"
-                      transition="scale-transition"
-                      offset-y
-                      
-                    >
-                      <template v-slot:activator="{ on }">
-                        <v-text-field
-                          v-model="computedDateFormatted"
-                          label="Date"
-                          hint="MM/DD/YYYY"
-                          persistent-hint
-                          prepend-icon=""
-                          readonly
-                          v-on="on"
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker v-model="date" no-title @input="menu2 = false"></v-date-picker>
-                    </v-menu>
-                    <p>Date: <strong>{{ date }}</strong></p>
-                  </v-col>
-              </v-row> -->
-
-
-            </v-row>
+            
            
-            <v-row justify="center">
-              <v-col cols="12">
-                <v-btn @click="setDoctorsOrder" :class="{ red: !valid, green: valid }">Order</v-btn>
+            <v-row md12 class="bt1" justify="center">
+              <v-col cols="12" class="button1">
+                <v-btn @click="checkMedecine" :class="{ red: !valid, green: valid }">Order</v-btn>
                 <v-btn style="margin-left: 15px;" @click="clear">clear</v-btn>
               </v-col>
             </v-row>
-            <br />
+            <!-- <v-row md12 class="bt2">
+              <v-col cols="12" class="button2">
+                <v-btn @click="viewtable" :class="red">View Doctor's Order</v-btn>
+                
+              </v-col>
+            </v-row> -->
+            
+            <!-- class="elevation-12" -->
+            
           </div>
         </v-form>
       </v-col>
@@ -189,16 +103,12 @@ export default {
         
       },
       valid: false,
-      customerCheck: false,
-      customerName: "",
       examinaton:[],
       medicationType:[],
       medicine:[],
       date:"",
       menu2:true,
-      computedDateFormatted:"",
-      //medicines:[],
-      //medicationTypes:[]
+      
     
     };
   },
@@ -240,46 +150,45 @@ export default {
           console.log(e);
         });
     },
-    // function ค้นหาลูกค้าด้วย ID
-    // findCustomer() {
-    //   http
-    //     .get("/customer/" + this.videoRental.customerId)
-    //     .then(response => {
-    //       console.log(response);
-    //       if (response.data != null) {
-    //         this.customerName = response.data.name;
-    //         this.customerCheck = response.status;
-    //       } else {
-    //         this.clear()
-    //       }          
-    //     })
-    //     .catch(e => {
-    //       console.log(e);
-    //     });
-    //   this.submitted = true;
-    // },
-    // function เมื่อกดปุ่ม submit
+    
+    checkMedecine(){
+      if((this.doctorsOrder.medicationTypeIds.length > this.doctorsOrder.medicineIds.length) || (this.doctorsOrder.medicationTypeIds.length < this.doctorsOrder.medicineIds.length)){
+        console.log("เข้าฟังก์ชั่น")
+        alert("เลือกจำนวน Medication Type ให้สอดคล้องกับจำนวน Medicine");
+        
+      }
+      else {
+        this.setDoctorsOrder();
+      }
+    },
+  
     setDoctorsOrder() {
+      console.log("this.doctorsOrder = " + this.doctorsOrder);
       http
-        .post(
-          "/postDoctor",this.doctorsOrder
-            
-        )
-        .then(response => {
-          console.log(response);
-          this.$router.push("/viewtable/"+response.data.id);
+        .post( "/postDoctor",this.doctorsOrder)
+        .then(response => {        
+            this.clear;
+            alert("Created Order Successfully");
+            // this.$router.push("/viewtable/"+response.data.id);
+            this.$router.push("/viewtable/"+response.data.id);
+          
         })
         .catch(e => {
           console.log(e);
+          alert("Can Not Create Order ! \nสั่งจ่ายยาแล้ว");
+          this.clear();
+
         });
       
       console.log(this.doctorsOrder);
       this.submitted = true;
     },
+    
     clear() {
       this.$refs.form.reset();
-      this.customerCheck = false;
     },
+
+
     refreshList() {
       this.getMedicine()
       this.getExamination();
@@ -288,13 +197,22 @@ export default {
     /* eslint-enable no-console */
   },
   mounted() {
-    // this.getEmployees();
-    // this.getVideos();
-    // this.getRentalTypes();
-
     this.getMedicine()
     this.getExamination();
     this.getMedicationType();
+
   }
 };
 </script>
+
+<style scoped>
+.bt1 {
+    text-align: center;
+}
+
+.button1 {
+    position: absolute;
+    top: 85%;
+    text-align: center;
+}
+</style>

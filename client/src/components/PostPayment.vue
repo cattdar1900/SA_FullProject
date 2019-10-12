@@ -14,7 +14,7 @@
           outlined
           v-model="Payment.doctorOrder"
           :items="doctororders"
-          item-text="startDate"
+          item-text="date"
           item-value="id"
           :rules="[(v) => !!v || 'Item is required']"
           required
@@ -109,6 +109,7 @@ export default {
       doctororders: [],
       paymentOptions: [],
       typeBanks: [],
+      prop:[]
           
     };
     
@@ -175,6 +176,7 @@ export default {
         .post("/paymentPost", this.Payment)
         .then(response => {
           console.log(response.data.id);
+         // this.prop = response.data
           if(response.data.id == null){
               alert("error")
 

@@ -7,8 +7,8 @@
     </v-row>
     <v-row justify="center">
       <v-col cols="6">
-       <h2> ชื่อผู้ป่วย :   
-         <!-- {{payment.paymentOption.name}} -->
+       <h2> ชื่อผู้ป่วย : 
+          {{pname}} 
        </h2>
       </v-col>
        </v-row>
@@ -24,7 +24,7 @@
        <v-row justify="center">
       <v-col cols="6">
        <h2> วันที่จ่ายยา :    
-          {{payment.doctorOrder.startDate}}
+          {{payment.doctorOrder.date}}
        </h2>
       </v-col>
        </v-row>
@@ -78,7 +78,7 @@ export default {
         id:"",
         doctorOrder:{
           id:"",
-          startDate:"",
+          date:"",
           // medicine:{
           //   id:null,
           //   name:"",
@@ -103,7 +103,8 @@ export default {
       Day:"",
       bedPricetotal:0,
       bedprice:0,
-      bedname:""
+      bedname:"",
+      pname:""
 
 
       };
@@ -138,6 +139,7 @@ export default {
               this.bedprice = response.data[0][1];
               this.getDate(response.data[0][5]);
               this.bedname = response.data[0][2];
+              this.pname = response.data[0][6];
 
               
             })

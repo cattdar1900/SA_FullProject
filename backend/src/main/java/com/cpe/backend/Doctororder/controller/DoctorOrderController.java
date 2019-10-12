@@ -55,23 +55,62 @@ public class DoctorOrderController {
 
     @PostMapping("/postDoctor")
     public DoctorOrder index(@RequestBody orderModel body ) {
-        DoctorOrder docOrder = new DoctorOrder();
         //xaminationSystem exam = body.get("examinationId");
         //System.out.println(body.get("examinationId"));
-        ExaminationSystem ex = examinationRepository.findById(body.getExaminationId()).get();
-        docOrder.setEx(ex);
-        docOrder.setDate(new Date());
+        DoctorOrder newdocOrder = new DoctorOrder();
+        DoctorOrder errorDoctorOrder = new DoctorOrder();
         
+        ExaminationSystem ex = examinationRepository.findById(body.getExaminationId()).get();
+        System.out.println(ex);
 
-        for(int i = 0 ; i<body.getMedicationTypeIds().length ; i++){
-            MedicineItem medI = new MedicineItem();
-            medI.setMedicine(medicineRepository.findById(Long.valueOf(body.getMedicineIds()[i]).longValue()));
-            medI.setMedicationType(medicationTypeRepository.findById(Long.valueOf(body.getMedicationTypeIds()[i]).longValue()));
-            medI.setDoctorOrder(docOrder);
-            medicineItemRepository.save(medI);
+        DoctorOrder doc = doctorOrderRepository.findByExaminationSystemId(Long.valueOf(body.getExaminationId()).longValue());
+         System.out.println(Long.valueOf(body.getExaminationId()).longValue());
+         System.out.println("========");
+         System.out.println(doc);
+         //System.out.println(doc.getEx());
+         System.out.println("========");
+         
+         if(doc == null){
+            newdocOrder.setEx(ex);
+            newdocOrder.setDate(new Date());
+            System.out.println("check2");
+
+            for(int i = 0 ; i< body.getMedicationTypeIds().length ; i++){
+                MedicineItem medI = new MedicineItem();
+                medI.setMedicine(medicineRepository.findById(Long.valueOf(body.getMedicineIds()[i]).longValue()));
+                medI.setMedicationType(medicationTypeRepository.findById(Long.valueOf(body.getMedicationTypeIds()[i]).longValue()));
+                medI.setDoctorOrder(newdocOrder);
+                medicineItemRepository.save(medI);
+            }
+
+
+            DoctorOrder docOrderNew = doctorOrderRepository.save(newdocOrder);
+            return docOrderNew;
+
+         }else{
+            if(doc.getEx() != null){
+
+                System.out.println("check1");
+                return errorDoctorOrder;
+            }else{
+                newdocOrder.setEx(ex);
+                newdocOrder.setDate(new Date());
+                System.out.println("check2");
+
+                for(int i = 0 ; i< body.getMedicationTypeIds().length ; i++){
+                    MedicineItem medI = new MedicineItem();
+                    medI.setMedicine(medicineRepository.findById(Long.valueOf(body.getMedicineIds()[i]).longValue()));
+                    medI.setMedicationType(medicationTypeRepository.findById(Long.valueOf(body.getMedicationTypeIds()[i]).longValue()));
+                    medI.setDoctorOrder(newdocOrder);
+                    medicineItemRepository.save(medI);
+                }
+
+
+                DoctorOrder docOrderNew = doctorOrderRepository.save(newdocOrder);
+                return docOrderNew;
+            }
         }
-        DoctorOrder docOrderNew = doctorOrderRepository.save(docOrder);
-        return docOrderNew;
+        
     }
 
     @GetMapping("/ordertable/{id}")
@@ -82,6 +121,18 @@ public class DoctorOrderController {
 
         return data;
     }
+
+    // @GetMapping("/ordertable/")
+    // public Collection<Object[]> getData(@PathVariable Long id){
+    //     System.out.println(id);
+    //     Collection<Object[]> data =  doctorOrderRepository.findByDoctorID(id);
+    //     System.out.println(data);
+
+    //     return data;
+    // }
+
+
+
 
   
    

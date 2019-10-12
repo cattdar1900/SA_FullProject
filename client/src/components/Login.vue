@@ -71,7 +71,7 @@ export default {
           console.log(response);
           if(this.User.username == response.data){
               alert("User " + response.data +" Login Success !  ");
-              this.$router.push("/home");
+              this.$router.push("/home/"+this.User.username);
           }
           else{
               alert(response.data );           

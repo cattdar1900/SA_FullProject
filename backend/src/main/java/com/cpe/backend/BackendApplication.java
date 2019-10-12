@@ -77,9 +77,22 @@ public class BackendApplication {
 	ReservationRepository reservationRepository,ExaminationRepository examinationRepository,MedicationTypeRepository medicationTypeRepository) {
 		return args -> {
 			User user1 = new User();
-			user1.setId("B5907519");
-			user1.setPassword("1500");
+			user1.setId("1111");
+			user1.setPassword("1111");
+			user1.setJob("หมอ");
 			userRepo.save(user1);
+
+			User user2 = new User();
+			user2.setId("2222");
+			user2.setPassword("2222");
+			user2.setJob("พยาบาล");
+			userRepo.save(user2);
+
+			User user3 = new User();
+			user3.setId("3333");
+			user3.setPassword("3333");
+			user3.setJob("เวชรเบียน");
+			userRepo.save(user3);
 
 			Gender gender1 = new Gender();
 			gender1.setName("ชาย");

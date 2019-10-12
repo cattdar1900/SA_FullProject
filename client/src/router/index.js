@@ -27,7 +27,7 @@ export default new Router({
         component: Login
         },
         {
-            path: '/home',
+            path: '/home/:id',
             component: home
             },
             {
@@ -56,11 +56,13 @@ export default new Router({
         },
         {
             path: '/bill/:id',
-            component: Bill
+            component: Bill,
+            props: true,
         },
         {
             path: '/bills/:id',
-            component: Bills
+            component: Bills,
+            props: true,
         },
         {
             path: '/doctororder',

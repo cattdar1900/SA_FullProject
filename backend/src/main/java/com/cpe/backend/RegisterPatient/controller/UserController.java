@@ -35,13 +35,13 @@ public class UserController {
     }
 
     @GetMapping("/User/{id}")
-    public Optional<User> Users(@PathVariable Long id) {
+    public Optional<User> Users(@PathVariable String id) {
         Optional<User> User = UserRepository.findById(id);
         return User;
     }
     @RequestMapping(value = "/User/login",method = RequestMethod.POST)
     public String Login(@RequestBody Map<String, String> body){
-        User UserU = UserRepository.findById(body.get("username"));
+        User UserU = UserRepository.findById(body.get("username")).get();
         String U = UserU.getPassword();
         String P = body.get("password");
         System.out.println(U);

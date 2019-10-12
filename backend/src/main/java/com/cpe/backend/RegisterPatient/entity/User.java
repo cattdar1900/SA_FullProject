@@ -27,5 +27,6 @@ public class User {  //สิทธิการรักษา
   @Column(name = "User_ID", unique = true, nullable = true)
   private @NonNull String id;  
   private String Password;
+  private String Job;
 
 }

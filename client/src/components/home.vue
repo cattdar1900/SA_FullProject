@@ -1,6 +1,11 @@
 <template>
   <v-container>
-
+    <v-row justify="center" >
+    <v-col cols="20" >
+      <h1>username : {{user.id}}</h1>
+      <h1>เข้าสู่ระบบในฐานะ : {{user.job}}</h1>
+      </v-col>
+      </v-row>
      
             
 
@@ -10,7 +15,7 @@
 
 
 <script>
-//import http from "../http-common";
+import http from "../http-common";
 
 export default {
   name: "home",
@@ -24,18 +29,30 @@ export default {
       valid: false,
       customerCheck: false,
       customerName: "",
-      benefits:[],
-      genders:[],
-      provinces:[]
+      user:{}
+      //+this.$route.params.id
     };
   },
   methods: {
     /* eslint-disable no-console */
+     getUser() {
+      http
+        .get("/User/"+this.$route.params.id)
+        .then(response => {
+          this.user = response.data;
+          console.log(response.data);
+        })
+        .catch(e => {
+          console.log(e);
+        });
+    },
+  
 
  
    
   },
   mounted() {
+    this.getUser();
     
   }
 };

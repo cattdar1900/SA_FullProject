@@ -14,13 +14,14 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 @RepositoryRestResource
 public interface MedicineItemRepository extends JpaRepository<MedicineItem, Long> {
     MedicineItem findById(long id);
+    
     // @Query( value = "SELECT * FROM ADMISSION as a INNER JOIN  PATIENT   as  p on a.ADMISSION_ID  = p.ADMISSION_ID where p.FIRST_NAME  = :firstName",
     //         nativeQuery = true)
     // Collection<MedicineItem> findByDocterOrder(@Param("Dr") long id);
 
     //@Param("firstName") String firstName
 
-    @Query(value ="SELECT m.MEDICINE_ID,m.NAME,m.Price    FROM MEDICINE as m INNER JOIN MEDICINEITEM as i on m.MEDICINE_ID  = i.MEDICINES_ID  where i.DOC_ORDER_ID =  :Dr",
+    @Query(value ="SELECT m.MEDICINE_ID,m.MNAME,m.Price    FROM MEDICINE as m INNER JOIN MEDICINEITEM as i on m.MEDICINE_ID  = i.MEDICINES_ID  where i.MEDICINE_ITEM  =  :Dr",
     nativeQuery = true)
     Collection<Object[]> findByDocterOrder(@Param("Dr") long id);
 
